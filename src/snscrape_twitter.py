@@ -31,17 +31,17 @@ def scrape_tweets(dates,keywords):
                     for tweet in sntwitter.TwitterSearchScraper(k + ' since:' + str(d1) + ' until:' + str(d2)).get_items():
                             tweet_count += 1
                             #get tweet if the user has more then 10,000 followers
-                            if tweet.user.followersCount > 10000:
+                            if tweet.user.followersCount > 5000:
                                 tweets_list.append([d1, tweet.content,tweet.user.followersCount, tweet.user.verified])
                                 count+=1
                             else:
                                 continue
                             # limit the number of tweets per day
-                            if count > 100:
+                            if count > 50:
                                 print(d2)
                                 tweet_daily_count.append([d1,tweet_count])
                                 break
-                    if count <= 100:
+                    if count <= 50:
                         tweet_daily_count.append([d1, tweet_count])
                 except:
                     # in case the scraper crashes during the process

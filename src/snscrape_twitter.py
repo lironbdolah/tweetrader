@@ -30,9 +30,9 @@ def scrape_tweets(dates,keywords):
                 try:
                     for tweet in sntwitter.TwitterSearchScraper(k + ' since:' + str(d1) + ' until:' + str(d2)).get_items():
                             tweet_count += 1
-                            #get tweet if the user has more then 10,000 followersx
+                            #get tweet if the user has more then 10,000 followers
                             if tweet.user.followersCount > 10000:
-                                tweets_list.append([tweet.date, tweet.content,tweet.user.followersCount, tweet.user.verified])
+                                tweets_list.append([d1, tweet.content,tweet.user.followersCount, tweet.user.verified])
                                 count+=1
                             else:
                                 continue
@@ -45,8 +45,8 @@ def scrape_tweets(dates,keywords):
                         tweet_daily_count.append([d1, tweet_count])
                 except:
                     # in case the scraper crashes during the process
-                    tweets_df = pd.DataFrame(tweets_list, columns=['Datetime', 'Text','User_Followers','Verified'])
-                    tweet_count_df = pd.DataFrame(tweet_daily_count , columns=['date', 'tweet_count'])
+                    tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text','User_Followers','Verified'])
+                    tweet_count_df = pd.DataFrame(tweet_daily_count , columns=['Date', 'tweet_count'])
                     words = k.split(' ')
                     tweets_df.to_csv('/Users/lironbdolah/Documents/nlp/' + words[0] + '_' + str(stop_count) +str(d1)+'.csv', index=False)
                     tweet_count_df.to_csv('/Users/lironbdolah/Documents/nlp/' + words[0] + '_' + str(
@@ -55,8 +55,8 @@ def scrape_tweets(dates,keywords):
                     stop_count += 1
 
         # Creating a dataframe from the tweets list above
-        tweets_df = pd.DataFrame(tweets_list,columns=['Datetime', 'Text','User_Followers','Verified'])
-        tweet_count_df = pd.DataFrame(tweet_daily_count , columns=['date', 'tweet_count'])
+        tweets_df = pd.DataFrame(tweets_list,columns=['Date', 'Text','User_Followers','Verified'])
+        tweet_count_df = pd.DataFrame(tweet_daily_count , columns=['Date', 'tweet_count'])
         words = k.split(' ')
         tweets_df.to_csv('/Users/lironbdolah/Documents/nlp/' + words[0] + '_cos_last.csv',index=False)
         tweet_count_df.to_csv('/Users/lironbdolah/Documents/nlp/' + words[0] + '_tweet_count.csv', index=False)

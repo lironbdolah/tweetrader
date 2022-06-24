@@ -106,11 +106,11 @@ def sort_data(keywords,stock_text_data):
         stock_text_data['sentiment'] = sentiments
 
         # save temp clean text
-        stock_text_data.to_csv('C:/Users/bdola/OneDrive/Documents/Order/At/nlp/2_cleaned_text/gme.csv',index=False)
+        stock_text_data.to_csv('/2_cleaned_text/stock_name.csv',index=False)
 
         # calculate daily sentiment:
         new_df = daily_sentiment(stock_text_data,100)
-        new_df.to_csv('C:/Users/bdola/OneDrive/Documents/Order/At/nlp/3_daily_sentiment/gme.csv', index=False)
+        new_df.to_csv('/3_daily_sentiment/stock_name.csv', index=False)
 
     except:
         new_df = pd.DataFrame()
@@ -119,11 +119,11 @@ def sort_data(keywords,stock_text_data):
         new_df['sentiment'] = sentiments
 
         # save temp data
-        new_df.to_csv('C:/Users/bdola/OneDrive/Documents/Order/At/nlp/2_cleaned_text/gme.csv', index=False)
+        new_df.to_csv('/2_cleaned_text/stock_name.csv', index=False)
 
         # calculate daily sentiment:
         new_df = daily_sentiment(new_df)
-        new_df.to_csv('C:/Users/bdola/OneDrive/Documents/Order/At/nlp/3_daily_sentiment/gme.csv', index=False)
+        new_df.to_csv('/3_daily_sentiment/stock_name.csv', index=False)
 
 
 
@@ -131,8 +131,7 @@ def sort_data(keywords,stock_text_data):
 
 if __name__ == '__main__':
 
-    stock_text_data = pd.read_csv('C:/Users/bdola/OneDrive/Documents/Order/At/nlp/1_raw_data/GME.csv')
-    #stock_text_data =stock_text_data.iloc[0:2001,:]
-    keywords = ['GOOG','Alphabet']
+    stock_text_data = pd.read_csv('/nlp/stock_name.csv') # load raw text data from the twitter scraper]
+    keywords = ['']
     stock_text_data = impact_score(stock_text_data)
     sort_data(keywords,stock_text_data)

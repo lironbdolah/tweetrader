@@ -48,8 +48,8 @@ def scrape_tweets(dates,keywords):
                     tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text','User_Followers','Verified'])
                     tweet_count_df = pd.DataFrame(tweet_daily_count , columns=['Date', 'tweet_count'])
                     words = k.split(' ')
-                    tweets_df.to_csv('/Users/lironbdolah/Documents/nlp/' + words[0] + '_' + str(stop_count) +str(d1)+'.csv', index=False)
-                    tweet_count_df.to_csv('/Users/lironbdolah/Documents/nlp/' + words[0] + '_' + str(
+                    tweets_df.to_csv('/nlp/' + words[0] + '_' + str(stop_count) +str(d1)+'.csv', index=False)
+                    tweet_count_df.to_csv('/nlp/' + words[0] + '_' + str(
                         stop_count) +  str(d1) + '_tweet_count.csv', index=False)
                     print("file saved")
                     stop_count += 1
@@ -58,8 +58,8 @@ def scrape_tweets(dates,keywords):
         tweets_df = pd.DataFrame(tweets_list,columns=['Date', 'Text','User_Followers','Verified'])
         tweet_count_df = pd.DataFrame(tweet_daily_count , columns=['Date', 'tweet_count'])
         words = k.split(' ')
-        tweets_df.to_csv('/Users/lironbdolah/Documents/nlp/' + words[0] + '_cos_last.csv',index=False)
-        tweet_count_df.to_csv('/Users/lironbdolah/Documents/nlp/' + words[0] + '_tweet_count.csv', index=False)
+        tweets_df.to_csv('/nlp/' + words[0] + '_cos_last.csv',index=False)
+        tweet_count_df.to_csv('/nlp/' + words[0] + '_tweet_count.csv', index=False)
         print("file saved")
 
 
@@ -67,7 +67,6 @@ def scrape_tweets(dates,keywords):
 
 if __name__ == '__main__':
     dates = date_range(date(2017, 5, 1),date(2022, 5, 1))
-    # Creating list to append tweet data to
     # define wanted key words
-    keywords = ['NFLX OR Netflix OR $NFLX','AAPL OR Apple OR $AAPL','MSFT OR Microsoft OR Bill Gates OR $MSFT']
+    keywords = [''] ### stocks you want to search for
     scrape_tweets(dates,keywords)
